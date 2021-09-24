@@ -77,7 +77,7 @@ export default class Table extends Base {
   }
 
   dateFields() {
-    return this.fields.filter(field => field.isDate());
+    return this.fields.filter(field => field.isTemporal());
   }
 
   // AGGREGATIONS

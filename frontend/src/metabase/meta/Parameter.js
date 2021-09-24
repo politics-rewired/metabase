@@ -233,7 +233,7 @@ function fieldFilterForParameter(parameter: Parameter): FieldPredicate {
   const subtype = getParameterSubType(parameter);
   switch (type) {
     case "date":
-      return (field: Field) => field.isDate();
+      return (field: Field) => field.isTemporal();
     case "id":
       return (field: Field) => field.isID();
     case "category":

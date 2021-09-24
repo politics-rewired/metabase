@@ -285,7 +285,7 @@ export default class Dimension {
   defaultFilterOperator(): ?FilterOperator {
     // let the DatePicker choose the default operator, otherwise use the first one
     // TODO: replace with a defaultFilter()- or similar which includes arguments
-    return this.field().isDate() ? null : this.filterOperators()[0];
+    return this.field().isTemporal() ? null : this.filterOperators()[0];
   }
 
   // AGGREGATIONS
@@ -748,7 +748,7 @@ export class FieldDimension extends Dimension {
     }
 
     // Add temporal dimensions
-    if (field.isDate() && !this.isIntegerFieldId()) {
+    if (field.isTemporal() && !this.isIntegerFieldId()) {
       const temporalDimensions = _.difference(
         DATETIME_UNITS,
         dimensions.map(dim => dim.temporalUnit()),
@@ -768,7 +768,7 @@ export class FieldDimension extends Dimension {
 
   defaultDimension(dimensionTypes = []): FieldDimension {
     const field = this.field();
-    if (field && field.isDate()) {
+    if (field && field.isTemporal()) {
       return this.withTemporalUnit(field.getDefaultDateTimeUnit());
     }
 

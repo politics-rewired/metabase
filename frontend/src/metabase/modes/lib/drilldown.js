@@ -1,5 +1,9 @@
 import { isa, TYPE } from "metabase/lib/types";
-import { isLatitude, isLongitude, isDate } from "metabase/lib/schema_metadata";
+import {
+  isLatitude,
+  isLongitude,
+  isTemporal,
+} from "metabase/lib/schema_metadata";
 
 import _ from "underscore";
 
@@ -97,11 +101,13 @@ class TemporalBucketingTransform extends Transform {
   }
 
   matchesDimension(dimension) {
-    return isDate(dimension.field()) && dimension.temporalUnit() === this._unit;
+    return (
+      isTemporal(dimension.field()) && dimension.temporalUnit() === this._unit
+    );
   }
 
   canBeAppliedToDimension(dimension) {
-    return isDate(dimension.field());
+    return isTemporal(dimension.field());
   }
 
   applyToDimension(dimension) {

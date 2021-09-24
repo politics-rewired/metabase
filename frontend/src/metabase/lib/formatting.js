@@ -13,7 +13,7 @@ import ExternalLink from "metabase/components/ExternalLink";
 
 import {
   isCoordinate,
-  isDate,
+  isTemporal,
   isEmail,
   isLatitude,
   isLongitude,
@@ -48,6 +48,7 @@ import {
   renderLinkURLForClick,
 } from "metabase/lib/formatting/link";
 import { NULL_DISPLAY_VALUE, NULL_NUMERIC_VALUE } from "metabase/lib/constants";
+import { isDate } from "metabase/lib/types";
 
 import type Field from "metabase-lib/lib/metadata/Field";
 import type { Column, Value } from "metabase-types/types/Dataset";
@@ -475,7 +476,9 @@ function formatDateTimeWithFormats(value, dateFormat, timeFormat, options) {
   if (dateFormat) {
     format.push(replaceDateFormatNames(dateFormat, options));
   }
-  if (timeFormat && options.time_enabled) {
+
+  const isDateType = isDate(options.column.effective_type);
+  if (timeFormat && options.time_enabled && !isDateType) {
     format.push(timeFormat);
   }
   return m.format(format.join(", "));
@@ -837,7 +840,7 @@ export function formatValueRaw(value: Value, options: FormattingOptions = {}) {
   } else if (column && column.unit != null) {
     return formatDateTimeWithUnit(value, column.unit, options);
   } else if (
-    isDate(column) ||
+    isTemporal(column) ||
     moment.isDate(value) ||
     moment.isMoment(value) ||
     moment(value, ["YYYY-MM-DD'T'HH:mm:ss.SSSZ"], true).isValid()

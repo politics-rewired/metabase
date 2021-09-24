@@ -103,7 +103,7 @@ export const getValueFromFields = (value, fields) => {
   // [].every is always true, so only check if there are some fields
   if (fields.length > 0) {
     // unix dates fields are numeric but query params shouldn't be parsed as numbers
-    if (fields.every(f => f.isNumeric() && !f.isDate())) {
+    if (fields.every(f => f.isNumeric() && !f.isTemporal())) {
       return parseFloat(value);
     }
 

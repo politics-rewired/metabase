@@ -282,7 +282,7 @@ export default class Filter extends MBQLClause {
       return [ngettext(msgid`${n} selection`, `${n} selections`, n)];
     } else if (
       dimension &&
-      dimension.field().isDate() &&
+      dimension.field().isTemporal() &&
       !dimension.field().isTime()
     ) {
       return generateTimeFilterValuesDescriptions(this);

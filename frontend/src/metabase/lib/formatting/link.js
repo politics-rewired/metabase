@@ -1,10 +1,10 @@
-import { isDate } from "metabase/lib/schema_metadata";
+import { isTemporal } from "metabase/lib/schema_metadata";
 
 import { formatValue } from "metabase/lib/formatting";
 import { formatDateTimeForParameter } from "./date";
 
 function formatValueForLinkTemplate(value, column) {
-  if (isDate(column) && column.unit) {
+  if (isTemporal(column) && column.unit) {
     return formatDateTimeForParameter(value, column.unit);
   }
   return value;

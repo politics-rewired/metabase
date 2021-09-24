@@ -3,7 +3,11 @@ import d3 from "d3";
 import { t } from "ttag";
 import crossfilter from "crossfilter";
 
-import { isDimension, isMetric, isDate } from "metabase/lib/schema_metadata";
+import {
+  isDimension,
+  isMetric,
+  isTemporal,
+} from "metabase/lib/schema_metadata";
 
 export const MAX_SERIES = 100;
 
@@ -290,7 +294,7 @@ export function getDefaultDimensionsAndMetrics(
   }
 
   if (dimensions.length === 2) {
-    if (isDate(dimensions[1]) && !isDate(dimensions[0])) {
+    if (isTemporal(dimensions[1]) && !isTemporal(dimensions[0])) {
       // if the series dimension is a date but the axis dimension is not then swap them
       dimensions.reverse();
     } else if (

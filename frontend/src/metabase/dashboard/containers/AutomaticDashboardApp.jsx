@@ -206,7 +206,7 @@ const TransientFilter = ({ filter, metadata }) => (
 
 const getIconForFilter = (filter, metadata) => {
   const field = Dimension.parseMBQL(filter[1], metadata).field();
-  if (field.isDate()) {
+  if (field.isTemporal()) {
     return "calendar";
   } else if (field.isLocation()) {
     return "location";

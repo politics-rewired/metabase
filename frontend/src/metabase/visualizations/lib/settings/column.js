@@ -7,7 +7,7 @@ import ChartNestedSettingColumns from "metabase/visualizations/components/settin
 
 import { keyForColumn } from "metabase/lib/dataset";
 import {
-  isDate,
+  isTemporal,
   isNumber,
   isCoordinate,
   isCurrency,
@@ -70,6 +70,7 @@ export function columnSettings({
 }
 
 import MetabaseSettings from "metabase/lib/settings";
+import { isDate } from "metabase/lib/types";
 
 export function getGlobalSettingsForColumn(column: Column) {
   const columnSettings = {};
@@ -252,7 +253,9 @@ export const DATE_COLUMN_SETTINGS = {
       }
       return { options };
     },
-    getHidden: ({ unit }: Column, settings: ColumnSettings) => !hasHour(unit),
+    getHidden: ({ unit, effective_type }: Column, settings: ColumnSettings) => {
+      return !hasHour(unit) || isDate(effective_type);
+    },
     getDefault: ({ unit }: Column) => (hasHour(unit) ? "minutes" : null),
   },
   time_style: {
@@ -269,7 +272,7 @@ export const DATE_COLUMN_SETTINGS = {
       ],
     }),
     getHidden: (column: Column, settings: ColumnSettings) =>
-      !settings["time_enabled"],
+      !settings["time_enabled"] || isDate(column.effective_type),
     readDependencies: ["time_enabled"],
   },
 };
@@ -476,7 +479,7 @@ export function getSettingDefintionsForColumn(series: Series, column: Column) {
       ? visualization.columnSettings(column)
       : visualization.columnSettings || {};
 
-  if (isDate(column) || (column.unit && column.unit !== "default")) {
+  if (isTemporal(column) || (column.unit && column.unit !== "default")) {
     return {
       ...extraColumnSettings,
       ...DATE_COLUMN_SETTINGS,

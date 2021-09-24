@@ -371,7 +371,7 @@ export default class Question {
         }
       }
       if (aggregations.length >= 1 && breakouts.length === 1) {
-        if (breakoutFields[0].isDate()) {
+        if (breakoutFields[0].isTemporal()) {
           if (
             breakoutDimensions[0] instanceof FieldDimension &&
             breakoutDimensions[0].temporalUnit() &&
@@ -393,7 +393,7 @@ export default class Question {
         }
       }
       if (aggregations.length === 1 && breakouts.length === 2) {
-        if (_.any(breakoutFields, f => f.isDate())) {
+        if (_.any(breakoutFields, f => f.isTemporal())) {
           return this.setDisplay("line");
         }
         if (

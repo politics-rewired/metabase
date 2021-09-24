@@ -2,7 +2,7 @@ import _ from "underscore";
 import { getIn } from "icepick";
 import { t, ngettext, msgid } from "ttag";
 
-import { isDate } from "metabase/lib/schema_metadata";
+import { isTemporal } from "metabase/lib/schema_metadata";
 import { parseTimestamp } from "metabase/lib/time";
 import { formatDateTimeForParameter } from "metabase/lib/formatting/date";
 import Question from "metabase-lib/lib/Question";
@@ -241,7 +241,7 @@ export function formatSourceForTarget(
   { data, extraData, clickBehavior },
 ) {
   const datum = data[source.type][source.id.toLowerCase()] || [];
-  if (datum.column && isDate(datum.column)) {
+  if (datum.column && isTemporal(datum.column)) {
     if (target.type === "parameter") {
       // we should serialize differently based on the target parameter type
       const parameter = getParameter(target, { extraData, clickBehavior });

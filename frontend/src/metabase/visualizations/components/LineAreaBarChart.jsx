@@ -16,7 +16,7 @@ import {
 
 import {
   isNumeric,
-  isDate,
+  isTemporal,
   isDimension,
   isMetric,
 } from "metabase/lib/schema_metadata";
@@ -153,7 +153,7 @@ export default class LineAreaBarChart extends Component {
     }
 
     // both or neither primary dimension must be dates
-    if (isDate(initialDimensions[0]) !== isDate(newDimensions[0])) {
+    if (isTemporal(initialDimensions[0]) !== isTemporal(newDimensions[0])) {
       return false;
     }
 
@@ -161,7 +161,7 @@ export default class LineAreaBarChart extends Component {
     // a timestamp field is both date and number so don't enforce the condition if both fields are dates; see #2811
     if (
       isNumeric(initialDimensions[0]) !== isNumeric(newDimensions[0]) &&
-      !(isDate(initialDimensions[0]) && isDate(newDimensions[0]))
+      !(isTemporal(initialDimensions[0]) && isTemporal(newDimensions[0]))
     ) {
       return false;
     }

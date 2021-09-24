@@ -17,7 +17,7 @@ export default function FilterPopoverHeader({
   const field = dimension.field();
   const operator = filter.operatorName();
 
-  const showOperatorSelector = !(field.isTime() || field.isDate());
+  const showOperatorSelector = !(field.isTime() || field.isTemporal());
   const showHeader = showFieldPicker || showOperatorSelector;
   const showOperatorSelectorOnOwnRow = isSidebar || !showFieldPicker;
 

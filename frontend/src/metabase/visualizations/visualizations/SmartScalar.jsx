@@ -4,7 +4,7 @@ import { Box, Flex } from "grid-styled";
 import { t, jt } from "ttag";
 import _ from "underscore";
 
-import { isDate } from "metabase/lib/schema_metadata";
+import { isTemporal } from "metabase/lib/schema_metadata";
 import { formatNumber, formatValue } from "metabase/lib/formatting";
 import { color } from "metabase/lib/colors";
 
@@ -94,8 +94,8 @@ export default class Smart extends React.Component {
       rawSeries,
     } = this.props;
 
-    const metricIndex = cols.findIndex(col => !isDate(col));
-    const dimensionIndex = cols.findIndex(col => isDate(col));
+    const metricIndex = cols.findIndex(col => !isTemporal(col));
+    const dimensionIndex = cols.findIndex(col => isTemporal(col));
 
     const lastRow = rows[rows.length - 1];
     const value = lastRow && lastRow[metricIndex];

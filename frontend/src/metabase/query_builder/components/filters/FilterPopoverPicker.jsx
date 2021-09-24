@@ -51,7 +51,7 @@ export default class FilterPopoverPicker extends React.Component {
         maxWidth={maxWidth}
         isSidebar={isSidebar}
       />
-    ) : field.isDate() ? (
+    ) : field.isTemporal() ? (
       <DatePicker
         className={className}
         filter={filter}

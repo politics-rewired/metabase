@@ -142,7 +142,7 @@ export function getFieldType(field) {
   }
 }
 
-export const isDate = isFieldType.bind(null, TEMPORAL);
+export const isTemporal = isFieldType.bind(null, TEMPORAL);
 export const isNumeric = isFieldType.bind(null, NUMBER);
 export const isBoolean = isFieldType.bind(null, BOOLEAN);
 export const isString = isFieldType.bind(null, STRING);
@@ -237,7 +237,7 @@ function numberArgument(field, table) {
 }
 
 function comparableArgument(field, table) {
-  if (isDate(field)) {
+  if (isTemporal(field)) {
     return {
       type: "date",
     };
@@ -263,7 +263,7 @@ function equivalentArgument(field, table) {
     };
   }
 
-  if (isDate(field)) {
+  if (isTemporal(field)) {
     return {
       type: "date",
     };

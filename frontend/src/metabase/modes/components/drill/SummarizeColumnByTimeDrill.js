@@ -23,7 +23,7 @@ export default ({
     return [];
   }
   const dateDimension = query
-    .dimensionOptions(d => d.field().isDate())
+    .dimensionOptions(d => d.field().isTemporal())
     .all()[0];
   if (!dateDimension) {
     return [];

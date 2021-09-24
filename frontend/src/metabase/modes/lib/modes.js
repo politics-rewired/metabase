@@ -60,9 +60,9 @@ export function getMode(question: ?Question): ?QueryMode {
     if (aggregations.length > 0 && breakouts.length > 0) {
       const breakoutFields = breakouts.map(b => b.field());
       if (
-        (breakoutFields.length === 1 && breakoutFields[0].isDate()) ||
+        (breakoutFields.length === 1 && breakoutFields[0].isTemporal()) ||
         (breakoutFields.length === 2 &&
-          breakoutFields[0].isDate() &&
+          breakoutFields[0].isTemporal() &&
           breakoutFields[1].isCategory())
       ) {
         return TimeseriesMode;

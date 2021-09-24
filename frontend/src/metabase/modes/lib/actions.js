@@ -5,7 +5,7 @@ import {
   fieldRefForColumn,
   fieldRefWithOption,
 } from "metabase/lib/dataset";
-import { isDate, isNumber } from "metabase/lib/schema_metadata";
+import { isTemporal, isNumber } from "metabase/lib/schema_metadata";
 
 import type { Breakout } from "metabase-types/types/Query";
 import type { DimensionValue } from "metabase-types/types/Visualization";
@@ -77,7 +77,7 @@ export function pivot(
 export function distribution(question: Question, column): ?Question {
   const query = question.query();
   if (query instanceof StructuredQuery) {
-    const breakout = isDate(column)
+    const breakout = isTemporal(column)
       ? fieldRefWithOption(fieldRefForColumn(column), "temporal-unit", "month")
       : isNumber(column)
       ? fieldRefWithOption(fieldRefForColumn(column), "binning", {
@@ -142,7 +142,7 @@ export function drillFilter(
   column,
 ): StructuredQuery {
   let filter;
-  if (isDate(column)) {
+  if (isTemporal(column)) {
     filter = [
       "=",
       fieldRefWithTemporalUnitForColumn(column, column.unit),

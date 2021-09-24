@@ -76,7 +76,7 @@ export const OperatorFilter = ({
   if (operator && operator.multi && values.length > maxDisplayValues) {
     const n = values.length;
     formattedValues = [ngettext(msgid`${n} selection`, `${n} selections`, n)];
-  } else if (dimension.field().isDate() && !dimension.field().isTime()) {
+  } else if (dimension.field().isTemporal() && !dimension.field().isTime()) {
     formattedValues = generateTimeFilterValuesDescriptions(filter);
   } else {
     const valuesWithOptions = values.map((value, index) => [

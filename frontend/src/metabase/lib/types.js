@@ -25,3 +25,7 @@ export function isPK(type) {
 export function isFK(type) {
   return isa(type, TYPE.FK);
 }
+
+export function isDate(type) {
+  return isa(type, TYPE.Date);
+}

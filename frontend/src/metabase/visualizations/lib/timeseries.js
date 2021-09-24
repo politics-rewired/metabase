@@ -1,7 +1,7 @@
 import moment from "moment-timezone";
 import _ from "underscore";
 
-import { isDate } from "metabase/lib/schema_metadata";
+import { isTemporal } from "metabase/lib/schema_metadata";
 import { parseTimestamp } from "metabase/lib/time";
 
 import { unexpectedTimezoneWarning, multipleTimezoneWarning } from "./warnings";
@@ -26,7 +26,7 @@ export function dimensionIsTimeseries({ cols, rows }, i = 0) {
 
 export function dimensionIsExplicitTimeseries({ cols }, i) {
   return (
-    isDate(cols[i]) &&
+    isTemporal(cols[i]) &&
     (cols[i].unit == null || TIMESERIES_UNITS.has(cols[i].unit))
   );
 }

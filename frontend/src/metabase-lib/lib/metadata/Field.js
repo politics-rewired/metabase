@@ -9,7 +9,7 @@ import Dimension from "../Dimension";
 import { formatField, stripId } from "metabase/lib/formatting";
 import { getFieldValues } from "metabase/lib/query/field";
 import {
-  isDate,
+  isTemporal,
   isTime,
   isNumber,
   isNumeric,
@@ -78,8 +78,8 @@ export default class Field extends Base {
     return stripId(this.displayName());
   }
 
-  isDate() {
-    return isDate(this);
+  isTemporal() {
+    return isTemporal(this);
   }
   isTime() {
     return isTime(this);
@@ -152,7 +152,7 @@ export default class Field extends Base {
    */
   isCompatibleWith(field) {
     return (
-      this.isDate() === field.isDate() ||
+      this.isTemporal() === field.isTemporal() ||
       this.isNumeric() === field.isNumeric() ||
       this.id === field.id
     );

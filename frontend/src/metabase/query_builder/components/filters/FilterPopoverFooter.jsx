@@ -29,7 +29,7 @@ export default function FilterPopoverFooter({
         filter={filter}
         onFilterChange={onFilterChange}
         operator={
-          field.isDate()
+          field.isTemporal()
             ? // DatePicker uses a different set of operator objects
               getOperator(filter)
             : // Normal operators defined in schema_metadata
