@@ -160,10 +160,10 @@ executors:
           MB_PRESTO_JDBC_TEST_CATALOG: test_data
           MB_PRESTO_JDBC_TEST_HOST: localhost
           MB_PRESTO_JDBC_TEST_PORT: 8443
-          MB_PRESTO_JDBC_TEST_SSL: "true"
+          MB_PRESTO_JDBC_TEST_SSL: true
           MB_PRESTO_JDBC_TEST_USER: metabase
           MB_PRESTO_JDBC_TEST_PASSWORD: metabase
-          MB_ENABLE_PRESTO_JDBC_DRIVER: "true"
+          MB_ENABLE_PRESTO_JDBC_DRIVER: true
           MB_PRESTO_JDBC_TEST_ADDITIONAL_OPTIONS: >
             SSLTrustStorePath=/tmp/cacerts-with-presto-ssl.jks&SSLTrustStorePassword=changeit
     # (see above)
@@ -191,7 +191,7 @@ executors:
           MB_SQLSERVER_TEST_USER: SA
       - image: mcr.microsoft.com/mssql/server:2017-latest
         environment:
-          ACCEPT_EULA: "Y"
+          ACCEPT_EULA: Y
           SA_PASSWORD: 'P@ssw0rd'
           MSSQL_MEMORY_LIMIT_MB: 1024
 
